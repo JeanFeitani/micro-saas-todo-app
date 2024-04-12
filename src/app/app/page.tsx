@@ -1,3 +1,8 @@
-export default function App() {
-  return <h1>App Page</h1>
+import { auth } from '@/services/auth'
+import { UserInfo } from './_components/user-info'
+
+export default async function Page() {
+  const session = await auth()
+
+  return <UserInfo user={session?.user} />
 }
