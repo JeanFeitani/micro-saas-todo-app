@@ -18,7 +18,7 @@ export function UserInfo({ user }: userInfoProps) {
         <Avatar>
           <AvatarFallback>U</AvatarFallback>
         </Avatar>
-        <span>{user?.email}</span>
+        <span>{user.email}</span>
 
         <Button
           variant="outline"

@@ -1,8 +1,19 @@
-import { auth } from '@/services/auth'
-import { UserInfo } from './_components/user-info'
+import {
+  DashboardPage,
+  DashboardPageHeader,
+  DashboardPageHeaderTitle,
+  DashboardPageMain,
+} from '@/components/dashboard/page'
 
 export default async function Page() {
-  const session = await auth()
-
-  return <UserInfo user={session?.user} />
+  return (
+    <DashboardPage>
+      <DashboardPageHeader>
+        <DashboardPageHeaderTitle>Tarefas</DashboardPageHeaderTitle>
+      </DashboardPageHeader>
+      <DashboardPageMain>
+        <h1>Tarefas</h1>
+      </DashboardPageMain>
+    </DashboardPage>
+  )
 }
