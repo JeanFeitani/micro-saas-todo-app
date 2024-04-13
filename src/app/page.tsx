@@ -1,5 +1,3 @@
-import Auth from './auth/page'
-
 export default function Home() {
-  return <Auth />
+  return <main>Landing Page</main>
 }
