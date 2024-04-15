@@ -1,7 +1,6 @@
 'use client'
 
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import {
   Sheet,
   SheetContent,
@@ -23,6 +22,12 @@ import {
 } from '@/components/ui/form'
 import { useForm } from 'react-hook-form'
 import { Todo } from '../types'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { upsertTodoSchema } from '../schema'
+import { upsertTodo } from '../actions'
+import { Button } from '@/components/ui/button'
+import { useRouter } from 'next/navigation'
+import { toast } from '@/components/ui/use-toast'
 
 type TodoUpsertSheetProps = {
   children?: React.ReactNode
@@ -31,10 +36,22 @@ type TodoUpsertSheetProps = {
 
 export function TodoUpsertSheet({ children }: TodoUpsertSheetProps) {
   const ref = useRef<HTMLDivElement>(null)
-  const form = useForm()
+  const router = useRouter()
 
-  const handleSubmit = form.handleSubmit((data) => {
-    console.log(data)
+  const form = useForm({
+    resolver: zodResolver(upsertTodoSchema),
+  })
+
+  const onSubmit = form.handleSubmit(async (data) => {
+    await upsertTodo(data)
+    router.refresh()
+
+    ref.current?.click()
+
+    toast({
+      title: '',
+      description: 'Your todo has been updated sucessfully',
+    })
   })
 
   return (
@@ -44,14 +61,11 @@ export function TodoUpsertSheet({ children }: TodoUpsertSheetProps) {
       </SheetTrigger>
       <SheetContent>
         <Form {...form}>
-          <form
-            onSubmit={handleSubmit}
-            className="space-y-8 h-screen flex flex-col"
-          >
+          <form onSubmit={onSubmit} className="space-y-8 h-screen">
             <SheetHeader>
-              <SheetTitle>Edit profile</SheetTitle>
+              <SheetTitle>Upsert Todo</SheetTitle>
               <SheetDescription>
-                Make changes to your profile here. Click save when you re done.
+                Add or edit your todo item here. Click save when you re done.
               </SheetDescription>
             </SheetHeader>
 
@@ -62,42 +76,19 @@ export function TodoUpsertSheet({ children }: TodoUpsertSheetProps) {
                 <FormItem>
                   <FormLabel>Title</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your todo title." {...field} />
+                    <Input placeholder="Enter your todo title" {...field} />
                   </FormControl>
                   <FormDescription>
-                    This is will be the publicly displayed name for the task.
+                    This will be the publicly displayed name for the task.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
 
-            {false && (
-              <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="name" className="text-right">
-                    Name
-                  </Label>
-                  <Input
-                    id="name"
-                    value="Pedro Duarte"
-                    className="col-span-3"
-                  />
-                </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="username" className="text-right">
-                    Username
-                  </Label>
-                  <Input
-                    id="username"
-                    value="@peduarte"
-                    className="col-span-3"
-                  />
-                </div>
-              </div>
-            )}
-
-            <SheetFooter className="mt-auto"></SheetFooter>
+            <SheetFooter className="mt-auto">
+              <Button type="submit">Save changes</Button>
+            </SheetFooter>
           </form>
         </Form>
       </SheetContent>
