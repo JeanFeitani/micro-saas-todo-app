@@ -33,52 +33,16 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { Badge } from '@/components/ui/badge'
-
-export type Todo = {
-  id: string
-  title: string
-  createdAt: Date
-  updatedAt: Date
-  finishedAt?: Date
-}
-
-const data: Todo[] = [
-  {
-    id: 'm5gr84i9',
-    title: 'fgdfgfdg',
-    createdAt: new Date('2024-04-02'),
-    updatedAt: new Date(),
-  },
-  {
-    id: 'hdrt4',
-    title: 'dgdfgfdg',
-    createdAt: new Date('2023-05-08'),
-    updatedAt: new Date(),
-    finishedAt: new Date(),
-  },
-  {
-    id: 'h4uj5nb',
-    title: 'bgdfgfdg',
-    createdAt: new Date('2024-05-02'),
-    updatedAt: new Date(),
-  },
-  {
-    id: '658u78og',
-    title: 'agdfgfdg',
-    createdAt: new Date('2024-05-02'),
-    updatedAt: new Date(),
-    finishedAt: new Date(),
-  },
-]
+import { Todo } from '../types'
 
 export const columns: ColumnDef<Todo>[] = [
   {
     accessorKey: 'status',
     header: 'Status',
     cell: ({ row }) => {
-      const { finishedAt } = row.original
-      const status: 'done' | 'waiting' = finishedAt ? 'done' : 'waiting'
-      const statusVariant: 'outline' | 'secondary' = finishedAt
+      const { doneAt } = row.original
+      const status: 'done' | 'waiting' = doneAt ? 'done' : 'waiting'
+      const statusVariant: 'outline' | 'secondary' = doneAt
         ? 'outline'
         : 'secondary'
 
@@ -142,7 +106,11 @@ export const columns: ColumnDef<Todo>[] = [
   },
 ]
 
-export function TodoDataTable() {
+type TodoDataTableProps = {
+  data: Todo[]
+}
+
+export function TodoDataTable({ data }: TodoDataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
