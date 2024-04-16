@@ -13,6 +13,7 @@ export function SettingsSidebar() {
   const isActive = (path: string) => {
     return pathname === path
   }
+  console.log(pathname)
 
   return (
     <aside>
@@ -24,12 +25,12 @@ export function SettingsSidebar() {
             active={isActive('/app/settings')}
           />
           <DashboardSidebarNavLink
-            href="app/settings/theme"
+            href="settings/theme"
             children="Theme"
             active={isActive('/app/settings/theme')}
           />
           <DashboardSidebarNavLink
-            href="app/settings/theme/billing"
+            href="app/settings/billing"
             children="Billing"
             active={isActive('/app/settings/billing')}
           />
