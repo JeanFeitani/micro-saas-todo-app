@@ -13,7 +13,13 @@ export function AuthForm() {
 
   const handleSubmit = form.handleSubmit(async (data) => {
     try {
-      console.log(data)
+      console.log(
+        process.env.DATABASE_URL,
+        process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
+        process.env.EMAIL_SERVER,
+        process.env.EMAIL_FROM,
+        process.env.NEXT_PUBLIC_APP_URL,
+      )
 
       await signIn('nodemailer', { email: data.email, redirect: false })
 
