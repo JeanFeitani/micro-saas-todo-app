@@ -1,3 +1,5 @@
+'use server'
+
 import { z } from 'zod'
 import { updateProfileSchema } from './schema'
 import { auth } from '@/services/auth'

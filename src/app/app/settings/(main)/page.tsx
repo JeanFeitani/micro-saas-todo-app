@@ -1,3 +1,8 @@
+import { auth } from '@/services/auth'
+import { ProfileForm } from './_components/form'
+
 export default async function Settings() {
-  return <h1>Settings</h1>
+  const session = await auth()
+
+  return <ProfileForm defaultValues={session?.user} />
 }
