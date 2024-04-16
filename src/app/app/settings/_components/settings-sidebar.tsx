@@ -20,17 +20,17 @@ export function SettingsSidebar() {
       <DashboardSidebarNav>
         <DashboardSidebarNavMain>
           <DashboardSidebarNavLink
-            href="app/settings"
+            href="/app/settings"
             children="My profile"
             active={isActive('/app/settings')}
           />
           <DashboardSidebarNavLink
-            href="settings/theme"
+            href="/app/settings/theme"
             children="Theme"
             active={isActive('/app/settings/theme')}
           />
           <DashboardSidebarNavLink
-            href="app/settings/billing"
+            href="/app/settings/billing"
             children="Billing"
             active={isActive('/app/settings/billing')}
           />
