@@ -17,8 +17,9 @@ export const {
   adapter: PrismaAdapter(prisma),
   providers: [
     EmailProvider({
-      server: process.env.EMAIL_SERVER,
-      from: process.env.EMAIL_FROM,
+      server:
+        'smtp://MS_AzkfZA@trial-o65qngkv1r3lwr12.mlsender.net:60vGtlecDWO2bzCp@smtp.mailersend.net:587',
+      from: 'MS_AzkfZA@trial-o65qngkv1r3lwr12.mlsender.net',
     }),
   ],
   trustHost: true,
