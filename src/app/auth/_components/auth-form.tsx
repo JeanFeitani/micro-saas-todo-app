@@ -50,7 +50,6 @@ export function AuthForm() {
         </div>
         <Button disabled={form.formState.isSubmitting} className="w-full">
           {form.formState.isSubmitting ? 'Sending...' : 'Send Magic Link'}
-          Send Magic Link
         </Button>
       </form>
       <div className="mt-4 text-center text-sm">
