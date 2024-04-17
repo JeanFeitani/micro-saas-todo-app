@@ -3,7 +3,6 @@
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { signIn } from 'next-auth/react'
 import { toast } from '@/components/ui/use-toast'
@@ -53,12 +52,6 @@ export function AuthForm() {
           Send Magic Link
         </Button>
       </form>
-      <div className="mt-4 text-center text-sm">
-        Dont have an account?
-        <Link className="underline" href="">
-          Sign Up
-        </Link>
-      </div>
     </div>
   )
 }
