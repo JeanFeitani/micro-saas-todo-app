@@ -9,7 +9,7 @@ export const createCheckoutSessionAction = async () => {
 
   if (!session?.user?.id) {
     return {
-      errror: 'Not aauthorized',
+      errror: 'Not authorized',
       data: null,
     }
   }
@@ -17,6 +17,7 @@ export const createCheckoutSessionAction = async () => {
   const checkoutSession = await createCheckoutSession(
     session.user.id as string,
     session.user.email as string,
+    session.user.stripeSubscriptionId as string,
   )
 
   if (!checkoutSession.url) return

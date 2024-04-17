@@ -12,8 +12,6 @@ export function AuthForm() {
 
   const handleSubmit = form.handleSubmit(async (data) => {
     try {
-      console.log(data)
-
       await signIn('nodemailer', { email: data.email, redirect: false })
 
       toast({
@@ -29,7 +27,7 @@ export function AuthForm() {
   })
 
   return (
-    <div className="mx-auto max-w-sm space-y-6">
+    <div className="mx-auto max-w-sm space-y-6 pt-12">
       <div className="space-y-2 text-center">
         <h1 className="text-3xl font-bold">Log in</h1>
         <p className="text-gray-500 dark:text-gray-400">
@@ -49,7 +47,6 @@ export function AuthForm() {
         </div>
         <Button disabled={form.formState.isSubmitting} className="w-full">
           {form.formState.isSubmitting ? 'Sending...' : 'Send Magic Link'}
-          Send Magic Link
         </Button>
       </form>
     </div>

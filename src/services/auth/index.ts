@@ -26,7 +26,7 @@ export const {
   events: {
     createUser: async (message) => {
       await createStripeCustomer({
-        name: message.user as string,
+        name: message.user.name as string,
         email: message.user.email as string,
       })
     },
