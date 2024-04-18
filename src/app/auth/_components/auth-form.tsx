@@ -3,7 +3,6 @@
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { signIn } from 'next-auth/react'
 import { toast } from '@/components/ui/use-toast'
@@ -13,14 +12,6 @@ export function AuthForm() {
 
   const handleSubmit = form.handleSubmit(async (data) => {
     try {
-      console.log(
-        process.env.DATABASE_URL,
-        process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
-        process.env.EMAIL_SERVER,
-        process.env.EMAIL_FROM,
-        process.env.NEXT_PUBLIC_APP_URL,
-      )
-
       await signIn('nodemailer', { email: data.email, redirect: false })
 
       toast({
@@ -36,7 +27,7 @@ export function AuthForm() {
   })
 
   return (
-    <div className="mx-auto max-w-sm space-y-6">
+    <div className="mx-auto max-w-sm space-y-6 pt-12">
       <div className="space-y-2 text-center">
         <h1 className="text-3xl font-bold">Log in</h1>
         <p className="text-gray-500 dark:text-gray-400">
@@ -58,12 +49,6 @@ export function AuthForm() {
           {form.formState.isSubmitting ? 'Sending...' : 'Send Magic Link'}
         </Button>
       </form>
-      <div className="mt-4 text-center text-sm">
-        Dont have an account?
-        <Link className="underline" href="">
-          Sign Up
-        </Link>
-      </div>
     </div>
   )
 }
