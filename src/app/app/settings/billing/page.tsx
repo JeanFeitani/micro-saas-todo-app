@@ -15,6 +15,7 @@ import { getUserCurrentPlan } from '@/services/stripe'
 export default async function Page() {
   const session = await auth()
   const plan = await getUserCurrentPlan(session?.user.id as string)
+  console.log(plan)
 
   return (
     <form action={createCheckoutSessionAction}>

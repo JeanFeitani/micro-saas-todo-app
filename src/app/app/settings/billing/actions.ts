@@ -4,12 +4,12 @@ import { auth } from '@/services/auth'
 import { createCheckoutSession } from '@/services/stripe'
 import { redirect } from 'next/navigation'
 
-export const createCheckoutSessionAction = async () => {
+export async function createCheckoutSessionAction() {
   const session = await auth()
 
   if (!session?.user?.id) {
     return {
-      errror: 'Not authorized',
+      error: 'Not authorized',
       data: null,
     }
   }

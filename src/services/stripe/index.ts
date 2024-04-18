@@ -154,6 +154,7 @@ export const getPlanByPrice = (priceId: string) => {
   ) as keyof Plans | undefined
 
   const plan = planKey ? plans[planKey] : null
+  console.log(priceId)
 
   if (!plan) {
     throw new Error(`Plan not found for priceId: ${priceId}`)
