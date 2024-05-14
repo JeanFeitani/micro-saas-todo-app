@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     event = stripe.webhooks.constructEvent(
       body,
       signature,
-      process.env.NEXT_PUBLIC_STRIPE_WEBHOOK_SECRET as string,
+      process.env.STRIPE_WEBHOOK_SECRET as string,
     )
   } catch (error: any) {
     console.error(`Webhook Error: ${error.message}`)
@@ -29,7 +29,6 @@ export async function POST(req: Request) {
       await handleProcessWebhookUpdatedSubscription(event.data)
       break
     default:
-      console.log(`Unhandled event type ${event.type}`)
   }
 
   return new Response('{ "received": true }', { status: 200 })
